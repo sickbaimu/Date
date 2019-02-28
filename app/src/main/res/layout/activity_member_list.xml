@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        style="@style/MyTextView"
+        android:layout_gravity="top"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%"
+        android:text="选择参与者" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        app:layout_heightPercent="90%"
+        app:layout_widthPercent="100%"
+        >
+        <android.support.percent.PercentFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <TextView
+                app:layout_widthPercent="30%"
+                app:layout_heightPercent="100%"
+                android:text="会议主题"
+                android:textSize="20sp"
+                android:layout_gravity="start|center_vertical"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/edit_theme"
+                app:layout_widthPercent="70%"
+                app:layout_heightPercent="100%"
+                android:layout_gravity="end"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:textColor="@color/Blue"
+                android:textColorHint="@color/Blue"
+                android:hint="未命名"
+                android:text="未命名"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </android.support.percent.PercentFrameLayout>
+        <com.lele.date.layout.AutoLinefeedLayout
+            android:orientation="horizontal"
+            android:id="@+id/autolinefeedlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/b_sure"
+        android:layout_gravity="bottom|center_horizontal"
+        style="@style/MyButton"
+        android:text="确定"/>
+</android.support.percent.PercentFrameLayout>

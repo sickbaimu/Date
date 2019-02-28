@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lele.date">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.M_RoomListActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.M_TimeActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".activity.R_TimeActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.T_MemberListActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.T_RoomListActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.R_RoomInfoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.O_MeetingInfoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.O_MeetingListActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.P_VersionActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.P_SystemSettingActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.B_AddUserActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.B_AddFirmActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.P_PersonalSettingActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.P_MyFirmActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.B_LoginActivity"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="www.example.com"
+                    android:pathPrefix="/gizmos"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.B_BindFirmActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.B_HomeDefaultActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.HomeActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.B_GetBackPwdActivity"
+            android:windowSoftInputMode="stateHidden" />
+    </application>
+
+</manifest>

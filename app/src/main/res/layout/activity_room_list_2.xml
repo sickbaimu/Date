@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_gravity="top"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%"
+        android:id="@+id/t_title"
+        style="@style/MyTextView"
+        android:layout_height="wrap_content"
+        android:text="当前空闲房间"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_gravity="bottom"
+        app:layout_heightPercent="90%"
+        app:layout_widthPercent="100%"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </android.support.v7.widget.RecyclerView>
+
+</android.support.percent.PercentFrameLayout>
