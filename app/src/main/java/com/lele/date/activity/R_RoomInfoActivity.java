@@ -37,6 +37,7 @@ public class R_RoomInfoActivity extends AppCompatActivity {
             t_room_name.setText(room.getRoomName());
             t_level.setText(String.valueOf(room.getRk()));
             t_maxcapacity.setText(String.valueOf(room.getCon()));
+            t_local.setText(room.getAddress());
         }
 
         Button b_date = findViewById(R.id.b_date);

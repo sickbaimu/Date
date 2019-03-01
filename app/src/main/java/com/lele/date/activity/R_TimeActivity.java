@@ -19,7 +19,6 @@ import com.lele.date.R;
 import com.lele.date.entity.Participant;
 import com.lele.date.entity.ReserverInfo;
 import com.lele.date.entity.MeetingRoom;
-import com.lele.date.entity.User;
 import com.lele.date.entity.UserInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
@@ -30,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class R_TimeActivity extends AppCompatActivity {
@@ -106,6 +106,10 @@ public class R_TimeActivity extends AppCompatActivity {
                 for(UserInfo userInfo:userlist){
                     participants.add(new Participant(userInfo.getId()));
                 }
+                Date enddate = calendar.getTime();
+                Calendar calendar_1 = Calendar.getInstance();
+                calendar_1.setTime(enddate);
+                calendar_1.set(Calendar.MINUTE,calendar_1.get(Calendar.MINUTE)+Integer.valueOf(time.getText().toString()));
                 ReserverInfo meeting = new ReserverInfo(
                         Server.getCnt_reserverinfos(),//会议ID
                         Client.getUserInfoId(),//创建人ID
@@ -114,7 +118,7 @@ public class R_TimeActivity extends AppCompatActivity {
                         0,//初始状态为0
                         new Date(),//当前系统时间
                         calendar.getTime(),//开始时间
-                        calendar.getTime(),//结束时间
+                        calendar_1.getTime(),//结束时间
                         room.getTrans_id()//会议室ID
                 );
 
@@ -141,10 +145,12 @@ public class R_TimeActivity extends AppCompatActivity {
         new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String text1 = hourOfDay + "时0" + minute + "分";
+                String text2 = hourOfDay + "时" + minute + "分";
                 if(minute<10)
-                    b_selectTimeBegin.setText(hourOfDay + "时0" + minute + "分");
+                    b_selectTimeBegin.setText(text1);
                 else
-                    b_selectTimeBegin.setText(hourOfDay + "时" + minute + "分");
+                    b_selectTimeBegin.setText(text2);
                 calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
                 calendar.set(Calendar.MINUTE,minute);
             }
@@ -163,7 +169,8 @@ public class R_TimeActivity extends AppCompatActivity {
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                b_selectDate.setText(year + "年" + (month + 1) + "月" + dayOfMonth + "日");
+                String text = year + "年" + (month + 1) + "月" + dayOfMonth + "日";
+                b_selectDate.setText(text);
                 calendar.set(year,month,dayOfMonth);
             }
         }, mYear, mMonth, mDay).show();
@@ -176,7 +183,7 @@ public class R_TimeActivity extends AppCompatActivity {
      * @return 显示的字符串
      */
     public static String datechange(Date date, String pattern) {
-        return new SimpleDateFormat(pattern).format(date);
+        return new SimpleDateFormat(pattern, Locale.CHINA).format(date);
     }
 
     /**

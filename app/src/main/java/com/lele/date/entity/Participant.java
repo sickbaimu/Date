@@ -3,12 +3,13 @@ package com.lele.date.entity;
 import java.io.Serializable;
 
 public class Participant implements Serializable {
-    private Integer personId;
-    private Integer state;
+    private Integer personId;//对象id
+    private Integer state;//状态
     private Integer ReserveId;//对应的会议id
 
     public Participant(Integer personId) {
         this.personId = personId;
+        state = 0;
     }
 
     public Integer getPersonId() {

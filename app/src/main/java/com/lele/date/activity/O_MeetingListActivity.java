@@ -1,6 +1,7 @@
 package com.lele.date.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -16,9 +17,12 @@ import com.lele.date.R;
 import com.lele.date.entity.ReserverInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class O_MeetingListActivity extends AppCompatActivity {
 
@@ -31,7 +35,7 @@ public class O_MeetingListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_list);
-        ArrayList<ReserverInfo> meetingList = new ArrayList<>();
+        ArrayList<ReserverInfo> meetingList;
         //从intent中获取要筛选的会议样式
         Intent intent = getIntent();
         switch (intent.getStringExtra("filter"))
@@ -112,13 +116,14 @@ public class O_MeetingListActivity extends AppCompatActivity {
             }
         }
 
-        public MeetingAdapter(List<ReserverInfo> meetingList)
+        MeetingAdapter(List<ReserverInfo> meetingList)
         {
             this.meetingList = meetingList;
         }
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        @NonNull
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meeting,parent,false);
             MeetingAdapter.ViewHolder holder = new MeetingAdapter.ViewHolder(view);
             view.setOnClickListener(new View.OnClickListener(){
@@ -138,13 +143,15 @@ public class O_MeetingListActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position){
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position){
             //按照获取到的会议设置各文字、图片的显示
             ReserverInfo meeting = meetingList.get(position);
             holder.imageView.setImageResource(R.drawable.email_close);
             holder.textView.setText(meeting.getMeetingTopic());
-            holder.id.setText(meeting.getReserverId());
-            holder.local_and_time.setText(Server.getMeetingRoomNameById(meeting.getRoomId())+" "+meeting.getStartTime().toString());
+            holder.id.setText(String.valueOf(meeting.getReserverId()));
+            SimpleDateFormat bartDateFormat = new SimpleDateFormat("MM-dd EEE HH:mm",Locale.CHINA);
+            String info = Server.getMeetingRoomNameById(meeting.getRoomId())+" "+bartDateFormat.format(meeting.getStartTime());
+            holder.local_and_time.setText(info);
         }
 
         @Override

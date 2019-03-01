@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class M_TimeActivity extends AppCompatActivity {
@@ -82,6 +83,10 @@ public class M_TimeActivity extends AppCompatActivity {
         for(UserInfo userInfo:userlist){
             participants.add(new Participant(userInfo.getId()));
         }
+        Date enddate = calendar.getTime();
+        final Calendar calendar_1 = Calendar.getInstance();
+        calendar_1.setTime(enddate);
+        calendar_1.set(Calendar.MINUTE,calendar_1.get(Calendar.MINUTE)+Integer.valueOf(time.getText().toString()));
         b_next.setOnClickListener(new View.OnClickListener() {
             //获取会议室按钮响应函数，填写 了会议主题，开始时间、持续时间、创建人等信息，并将从intent获得的成员列表填入
             @Override
@@ -94,7 +99,7 @@ public class M_TimeActivity extends AppCompatActivity {
                         0,//初始状态为0
                         new Date(),//当前系统时间
                         calendar.getTime(),//开始时间
-                        calendar.getTime(),//结束时间
+                        calendar_1.getTime(),//结束时间
                         -1//会议室ID未填写
                         );
                 Intent intent = new Intent(getApplicationContext(),M_RoomListActivity.class);//下一步走向选择会议室
@@ -118,10 +123,12 @@ public class M_TimeActivity extends AppCompatActivity {
         new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String text1 = hourOfDay + "时0" + minute + "分";
+                String text2 = hourOfDay + "时" + minute + "分";
                 if(minute<10)
-                    b_selectTimeBegin.setText(hourOfDay + "时0" + minute + "分");
+                    b_selectTimeBegin.setText(text1);
                 else
-                    b_selectTimeBegin.setText(hourOfDay + "时" + minute + "分");
+                    b_selectTimeBegin.setText(text2);
                 calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
                 calendar.set(Calendar.MINUTE,minute);
             }
@@ -138,9 +145,11 @@ public class M_TimeActivity extends AppCompatActivity {
         int  mMonth = ca.get(Calendar.MONTH);
         int  mDay = ca.get(Calendar.DAY_OF_MONTH);
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                b_selectDate.setText(year + "年" + (month + 1) + "月" + dayOfMonth + "日");
+                String text = year + "年" + (month + 1) + "月" + dayOfMonth + "日";
+                b_selectDate.setText(text);
                 calendar.set(year,month,dayOfMonth);
             }
         }, mYear, mMonth, mDay).show();
@@ -153,6 +162,6 @@ public class M_TimeActivity extends AppCompatActivity {
      * @return 显示的字符串
      */
     public static String datechange(Date date, String pattern) {
-        return new SimpleDateFormat(pattern).format(date);
+        return new SimpleDateFormat(pattern, Locale.CHINA).format(date);
     }
 }

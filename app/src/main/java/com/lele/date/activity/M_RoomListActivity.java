@@ -1,6 +1,7 @@
 package com.lele.date.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,13 +61,14 @@ public class M_RoomListActivity extends AppCompatActivity {
             }
         }
 
-        public RoomAdapter(List<MeetingRoom> roomList)
+        RoomAdapter(List<MeetingRoom> roomList)
         {
             this.roomList = roomList;
         }
 
         @Override
-        public RoomAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        @NonNull
+        public RoomAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_room,parent,false);
             RoomAdapter.ViewHolder holder = new RoomAdapter.ViewHolder(view);
             holder.view.setOnClickListener(new View.OnClickListener(){
@@ -76,20 +78,20 @@ public class M_RoomListActivity extends AppCompatActivity {
                     CardView cardView =(CardView)view;
                     TextView textView = cardView.findViewById(R.id.room_id);
                     String roomid = textView.getText().toString();
-                    MeetingRoom room = Server.getMeetingRoomByIdAndOrgId(Integer.valueOf(roomid), Client.getOrgId());
-                    meeting.setReserverId(room.getTrans_id());//为会议设置会议室
-                        MyDialogFragment myDialogFragment = new MyDialogFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("meeting", meeting);
-                        myDialogFragment.setArguments(bundle);
-                        myDialogFragment.show(getFragmentManager(),"Dialog");
+                    meeting.setRoomId(Integer.valueOf(roomid));//为会议设置会议室
+                    MyDialogFragment myDialogFragment = new MyDialogFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("meeting", meeting);
+                    myDialogFragment.setArguments(bundle);
+                    myDialogFragment.show(getFragmentManager(), "Dialog");
+
                 }
             });
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(RoomAdapter.ViewHolder holder, int position){
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position){
             MeetingRoom room = roomList.get(position);
             holder.imageView.setImageResource(R.drawable.img_room_free);
             holder.textView.setText(room.getRoomName());

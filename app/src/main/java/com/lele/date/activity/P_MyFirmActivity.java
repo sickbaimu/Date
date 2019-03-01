@@ -2,6 +2,7 @@ package com.lele.date.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.lele.date.R;
@@ -25,6 +26,8 @@ public class P_MyFirmActivity extends AppCompatActivity {
             //新建空的字符串，待填入信息
             String basicinfo = "";
             //填入公司创建人
+            Log.d("Rootid",String.valueOf(organizationInfo.getRootId()));
+
             basicinfo += "创建人：" + Server.getUserInfoNameById(organizationInfo.getRootId()) + "\n";
             //从服务器获取当前员工人数并填入
             basicinfo += "当前员工：" + Server.getUserInfosNumByOrgId(organizationInfo.getId()) + "人\n";

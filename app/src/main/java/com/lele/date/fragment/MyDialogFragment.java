@@ -19,6 +19,10 @@ import com.lele.date.entity.ReserverInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class MyDialogFragment extends DialogFragment implements DialogInterface.OnClickListener{
     /**
@@ -82,15 +86,25 @@ public class MyDialogFragment extends DialogFragment implements DialogInterface.
         String info = "";
         info += "预约人：" + Server.getUserInfoNameById(meeting.getUserId())+ "\n";
         info += "会议主题：" + meeting.getMeetingTopic() + "\n";
-        info += "开始时间：" + meeting.getStartTime().toString()+ "\n";
+        info += "开始时间：" + datechange(meeting.getStartTime(),"MM-dd EEE HH:mm")+ "\n";
+        info += "结束时间：" + datechange(meeting.getEndTime(),"MM-dd EEE HH:mm")+ "\n";
         info += "会议室：" + Server.getMeetingRoomNameById(meeting.getRoomId())+ "\n";
-        info += "持续时长：" + "\n";
         info += "邀请与会人员：\n";
         for(Participant participant:meeting.getParticipants())
         {
-            info += Server.getUserInfoNameById(participant.getPersonId());
+            info += Server.getUserInfoNameById(participant.getPersonId()) + "  ";
         }
         info += "\n";
         return info;
+    }
+
+    /**
+     * 设置时间显示样式
+     * @param date 时间
+     * @param pattern 显示格式，如"yyyy年MM月dd日"
+     * @return 显示的字符串
+     */
+    public static String datechange(Date date, String pattern) {
+        return new SimpleDateFormat(pattern, Locale.CHINA).format(date);
     }
 }

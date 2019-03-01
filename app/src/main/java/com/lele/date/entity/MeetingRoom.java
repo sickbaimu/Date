@@ -19,10 +19,13 @@ public class MeetingRoom implements Serializable {
     private Integer Rk;     //权限等级（算法需要）
     private MeetingRoomTimeSlice meetingRoomTimeSlice[];
 
-    public MeetingRoom(Integer trans_id, Integer orgId, String roomName) {
+    public MeetingRoom(Integer trans_id, Integer orgId, String roomName,int Con,int Rk,String address) {
         this.trans_id = trans_id;
         this.orgId = orgId;
         this.roomName = roomName;
+        this.Con = Con;
+        this.Rk = Rk;
+        this.address = address;
     }
 
     public Integer getTrans_id() {

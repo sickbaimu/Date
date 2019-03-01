@@ -1,5 +1,6 @@
 package com.lele.date.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -57,7 +58,7 @@ public class T_RoomListActivity extends AppCompatActivity {
             }
         }
 
-        public RoomAdapter(List<MeetingRoom> roomList)
+        RoomAdapter(List<MeetingRoom> roomList)
         {
             this.roomList = roomList;
         }
@@ -74,12 +75,10 @@ public class T_RoomListActivity extends AppCompatActivity {
                     TextView textView = cardView.findViewById(R.id.room_id);
                     String roomid = textView.getText().toString();
                     MeetingRoom room = Server.getMeetingRoomByIdAndOrgId(Integer.valueOf(roomid), Client.getOrgId());
-                    meeting.setReserverId(room.getTrans_id());//为会议设置会议室
-                    MyDialogFragment myDialogFragment = new MyDialogFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("meeting", meeting);
-                    myDialogFragment.setArguments(bundle);
-                    myDialogFragment.show(getFragmentManager(),"Dialog");
+                    meeting.setRoomId(room.getTrans_id());//为会议设置会议室
+                    Intent intent = new Intent(getApplicationContext(),T_MemberListActivity.class);
+                    intent.putExtra("meeting",meeting);
+                    startActivity(intent);
                 }
             });
             return holder;

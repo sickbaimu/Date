@@ -67,6 +67,9 @@ public class Server{
     private void initdata(){
         /*初始化公司法人*/
         User boss = new User(cnt_users++,"Boss","Boss",2);
+        UserInfo boss_info = new UserInfo(cnt_userinfos++,"boss","1",5);
+        users.add(boss);
+        userInfos.add(boss_info);
 
         /*初始化公司*/
         OrganizationInfo organizationInfo = new OrganizationInfo(cnt_organzations++,boss.getId(),firmsname[0]);
@@ -80,12 +83,12 @@ public class Server{
         /*初始化用户*/
         for(String name:usersname) {
             users.add(new User(cnt_users++,name,name, 0));
-            userInfos.add(new UserInfo(cnt_userinfos++,name,"0"));
+            userInfos.add(new UserInfo(cnt_userinfos++,name,"0",1));
         }
 
         /*初始化会议室*/
         for(String name:roomsname)
-            meetingRooms.add(new MeetingRoom(cnt_meetingrooms++,organizationInfo.getId(),name));
+            meetingRooms.add(new MeetingRoom(cnt_meetingrooms++,organizationInfo.getId(),name,30,1,"未设定"));
 
         /*初始化会议*/
         Calendar calendar_1 = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));//获得当前系统时间
@@ -235,9 +238,12 @@ public class Server{
     }
 
     public static String getUserInfoNameById(int user_id){
-        for (UserInfo userinfo:getUserInfos())
+        for (UserInfo userinfo:getUserInfos()){
+            Log.d("checkid",String.valueOf(userinfo.getId()));
             if(userinfo.getId() == user_id)
                 return userinfo.getName();
+        }
+
         return null;
     }
 
@@ -277,7 +283,7 @@ public class Server{
     public static int getUserInfosNumByOrgId(int org_id){
         int cnt = 0;
         for(UserInfo userInfo:getUserInfos())
-            if(userInfo.getOrgId().equals(org_id))
+            if(getDepartmentInfoById(userInfo.getDepart()).getOrgId()==org_id)
                 cnt++;
             return cnt;
     }

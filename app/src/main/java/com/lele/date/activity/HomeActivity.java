@@ -36,6 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -155,8 +156,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), T_RoomListActivity.class);
+                Date enddate = calendar.getTime();
+                Calendar calendar_1 = Calendar.getInstance();
+                calendar_1.setTime(enddate);
+                calendar_1.set(Calendar.MINUTE,calendar_1.get(Calendar.MINUTE)+Integer.valueOf(time.getText().toString()));
                 //构造新的Meeting对象，填入开始时间和持续时间、创办人，其他待填
-                ReserverInfo reserveInfo = new ReserverInfo(Server.getCnt_reserverinfos(),Client.getUserInfoId(),"",null,0,new Date(),calendar.getTime(),calendar.getTime(),-1);
+                ReserverInfo reserveInfo = new ReserverInfo(Server.getCnt_reserverinfos(),Client.getUserInfoId(),"",null,0,new Date(),calendar.getTime(),calendar_1.getTime(),-1);
                 //传入Meeting对象，启动活动选择会议室
                 intent.putExtra("meeting",reserveInfo);
                 startActivity(intent);
@@ -179,7 +184,7 @@ public class HomeActivity extends AppCompatActivity {
      * @return 显示的字符串
      */
     public static String datechange(Date date, String pattern) {
-        return new SimpleDateFormat(pattern).format(date);
+        return new SimpleDateFormat(pattern, Locale.CHINA).format(date);
     }
 
     /**
@@ -189,10 +194,12 @@ public class HomeActivity extends AppCompatActivity {
         new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String text1 = hourOfDay + ":0" + minute;
+                String text2 = hourOfDay + ":" + minute;
                 if(minute<10)//补充十位上的0
-                    b_selectTimeBegin.setText(hourOfDay + ":0" + minute);
+                    b_selectTimeBegin.setText(text1);
                 else
-                    b_selectTimeBegin.setText(hourOfDay + ":" + minute);
+                    b_selectTimeBegin.setText(text2);
                 calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
                 calendar.set(Calendar.MINUTE,minute);
             }

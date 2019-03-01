@@ -2,19 +2,24 @@ package com.lele.date.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lele.date.R;
 import com.lele.date.entity.ReserverInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class O_MeetingInfoActivity extends AppCompatActivity {
 
     /**
      * 会议信息页面，显示从intent获得的会议的所有信息
      */
-    TextView t_meeting_theme,t_room_name,t_num_member,t_begin_time,t_during_time,t_username,t_my_stage;
+    TextView t_meeting_theme,t_room_name,t_num_member,t_begin_time,t_end_time,t_username,t_my_stage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +28,7 @@ public class O_MeetingInfoActivity extends AppCompatActivity {
         t_room_name = findViewById(R.id.t_room_name);
         t_num_member = findViewById(R.id.t_num_member);
         t_begin_time = findViewById(R.id.t_begin_time);
-        t_during_time = findViewById(R.id.t_during_time);
+        t_end_time = findViewById(R.id.t_end_time);
         t_username = findViewById(R.id.t_username);
         t_my_stage = findViewById(R.id.t_my_stage);
         //从intent获得会议
@@ -31,8 +36,9 @@ public class O_MeetingInfoActivity extends AppCompatActivity {
         t_meeting_theme.setText(meeting.getMeetingTopic());
         t_room_name.setText(Server.getMeetingRoomNameById(meeting.getRoomId()));
         t_num_member.setText(String.valueOf(meeting.getParticipants().size()));
-        t_begin_time.setText(meeting.getStartTime().toString());
-        t_during_time.setText(meeting.getStartTime().toString());
+        SimpleDateFormat bartDateFormat = new SimpleDateFormat("MM-dd EEE HH:mm", Locale.CHINA);
+        t_begin_time.setText(bartDateFormat.format(meeting.getStartTime()));
+        t_end_time.setText(bartDateFormat.format(meeting.getEndTime()));
         t_username.setText(Server.getUserInfoNameById(meeting.getUserId()));
         String stage = "未知";
         switch (Server.getStage(meeting.getReserverId(),Client.getUserInfoId())){

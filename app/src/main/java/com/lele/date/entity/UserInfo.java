@@ -14,10 +14,11 @@ public class UserInfo implements Serializable {
     private String depart;                //部门ID
     private Integer authority;            //权限
 
-    public UserInfo(Integer id, String name,String depart) {
+    public UserInfo(Integer id, String name,String depart,int authority) {
         this.id = id;
         this.name = name;
         this.depart = depart;
+        this.authority = authority;
     }
 
     public String getDepart() {
