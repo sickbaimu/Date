@@ -1,5 +1,7 @@
 package com.lele.date.faker;
 
+import android.util.Log;
+
 import com.lele.date.entity.DepartmentInfo;
 import com.lele.date.entity.OrganizationInfo;
 import com.lele.date.entity.Participant;
@@ -142,7 +144,7 @@ public class Server{
         return users;
     }
 
-    private static ArrayList<UserInfo> getUserInfos() {
+    public static ArrayList<UserInfo> getUserInfos() {
         return userInfos;
     }
 

@@ -3,6 +3,7 @@ package com.lele.date.activity.before;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         edit_pwd = findViewById(R.id.edit_pwd);
         b_login = findViewById(R.id.login);
         //默认用户名和密码，仅供测试用
-        edit_pwd.setText("陈超凡");
-        edit_user.setText("陈超凡");
+        edit_pwd.setText("hello");
+        edit_user.setText("hello");
         b_register.setOnClickListener(new View.OnClickListener() {
             /*
              * 进入注册新用户页面，暂时还没写
@@ -91,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         if(user!=null)
         {
             Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_SHORT).show();
+            Log.d("userinfosize",""+Server.getUserInfos().size());
             UserInfo userInfo = Server.getUserInfoByUserId(user.getId());
             if(userInfo!=null) {
                 Client.setUserInfo(userInfo);

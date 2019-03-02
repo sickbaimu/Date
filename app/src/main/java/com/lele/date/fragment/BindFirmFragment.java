@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -83,10 +84,10 @@ public class BindFirmFragment extends DialogFragment implements DialogInterface.
         b_sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(view.getContext(),""+Server.getUserInfosNumByOrgId(0),Toast.LENGTH_SHORT).show();
                 Server.AddUserInfo(Client.getUser().getId(),editText.getText().toString(),depart_id);
-                Toast.makeText(view.getContext(),"添加成功！"+Server.getUserInfosNumByOrgId(0),Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity(), LoginActivity.class));//返回主页
+                UserInfo userInfo = Server.getUserInfoByUserId(Client.getUser().getId());
+                Client.setUserInfo(userInfo);
+                startActivity(new Intent(getActivity(), HomeActivity.class));
             }
         });
 
