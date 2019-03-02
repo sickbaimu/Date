@@ -20,6 +20,7 @@ import java.util.TimeZone;
 
 public class Server{
     private String url = "http://192.168.199.227:8080/";
+    int version = 1;
     private String usersname[]={"董金华","陈超凡","蒋清","周和夏","虞若何","秦安民","梅古达","马修","福山浩"};
     private String roomsname[] = {"X1001","X1002","X1003","X2001","X2002","X2003","X3001","X3002","X3003","X4001","X4002","X4004","X4004"};
     private String departmentname[]={"技术部","财务部"};
