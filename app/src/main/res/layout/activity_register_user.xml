@@ -33,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
+                android:id="@+id/username"
                 app:layout_widthPercent="70%"
                 app:layout_heightPercent="100%"
                 android:layout_gravity="end"
@@ -44,45 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </android.support.percent.PercentFrameLayout>
-        <android.support.percent.PercentFrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60sp"
-                app:layout_widthPercent="30%"
-                app:layout_heightPercent="100%"
-                android:text="@string/tel_label"
-                android:textSize="20sp"
-                android:layout_gravity="start|center_vertical"
-                android:gravity="center"
-                />
-            <android.support.percent.PercentFrameLayout
-                android:layout_width="match_parent"
-                android:layout_gravity="end"
-                android:layout_height="60sp"
-                app:layout_widthPercent="70%"
-                app:layout_heightPercent="100%">
-                <EditText
-                    app:layout_widthPercent="70%"
-                    app:layout_heightPercent="100%"
-                    android:gravity="center_vertical"
-                    android:textSize="20sp"
-                    android:textColor="@color/Blue"
-                    android:textColorHint="@color/Blue"
-                    android:hint="@string/admin_label"/>
-                <Button
-                    android:background="@color/Transparent"
-                    android:textColor="@color/Blue"
-                    app:layout_widthPercent="30%"
-                    app:layout_heightPercent="100%"
-                    android:layout_gravity="end"
-                    android:text="@string/send_verification_code_label"
-                    />
-            </android.support.percent.PercentFrameLayout>
-        </android.support.percent.PercentFrameLayout>
+
         <android.support.percent.PercentFrameLayout
             android:layout_width="match_parent"
             android:layout_height="60sp"
@@ -97,6 +60,7 @@
                 android:gravity="center"
                 />
             <EditText
+                android:id="@+id/pwd"
                 app:layout_widthPercent="70%"
                 app:layout_heightPercent="100%"
                 android:layout_gravity="end"
@@ -119,28 +83,7 @@
                 android:layout_gravity="start|center_vertical"
                 android:gravity="center" />
             <EditText
-                app:layout_widthPercent="70%"
-                app:layout_heightPercent="100%"
-                android:layout_gravity="end"
-                android:gravity="center_vertical"
-                android:textSize="20sp"
-                android:textColor="@color/Blue"
-                android:textColorHint="@color/Blue"
-                android:hint="@string/admin_label"/>
-        </android.support.percent.PercentFrameLayout>
-        <android.support.percent.PercentFrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
-            <TextView
-                app:layout_widthPercent="30%"
-                app:layout_heightPercent="100%"
-                android:text="@string/verification_code"
-                android:textSize="20sp"
-                android:layout_gravity="start|center_vertical"
-                android:gravity="center"/>
-            <EditText
+                android:id="@+id/pwd_confirm"
                 app:layout_widthPercent="70%"
                 app:layout_heightPercent="100%"
                 android:layout_gravity="end"
@@ -151,6 +94,7 @@
                 android:hint="@string/admin_label"/>
         </android.support.percent.PercentFrameLayout>
         <Button
+            android:id="@+id/b_upload_face"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -163,6 +107,7 @@
             android:background="@color/Transparent"
             android:drawableTop="@drawable/camera" />
         <Button
+            android:id="@+id/b_sure"
             style="@style/MyButton"
             android:text="@string/finish_register_label"/>
     </LinearLayout>

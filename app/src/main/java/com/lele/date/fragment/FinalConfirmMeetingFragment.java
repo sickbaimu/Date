@@ -13,10 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lele.date.R;
-import com.lele.date.activity.HomeActivity;
+import com.lele.date.activity.home.HomeActivity;
 import com.lele.date.entity.Participant;
 import com.lele.date.entity.ReserverInfo;
-import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
 
 import java.text.SimpleDateFormat;
@@ -24,7 +23,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class MyDialogFragment extends DialogFragment implements DialogInterface.OnClickListener{
+public class FinalConfirmMeetingFragment extends DialogFragment implements DialogInterface.OnClickListener{
     /**
      * 自定义的DialogFragment，只有当会议信息都填写好了之后调用给用户进行最终的确认，确认后为服务器新添加一条会议信息
      */

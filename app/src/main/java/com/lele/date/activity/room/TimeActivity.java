@@ -1,46 +1,37 @@
-package com.lele.date.activity;
+package com.lele.date.activity.room;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.lele.date.R;
-import com.lele.date.entity.Participant;
 import com.lele.date.entity.ReserverInfo;
 import com.lele.date.entity.MeetingRoom;
-import com.lele.date.entity.UserInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
-import com.lele.date.fragment.MyDialogFragment;
-import com.lele.date.layout.AutoLinefeedLayout;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class R_TimeActivity extends AppCompatActivity {
+public class TimeActivity extends AppCompatActivity {
 
     /**
      * 按会议室预约模式下的时间等其他信息填写页面
      */
-    Button b_selectDate,b_selectTimeBegin;
+    Button b_selectDate,b_selectTimeBegin,b_date;
     Calendar calendar = Calendar.getInstance();
-    ArrayList<CheckBox> list;
-    ArrayList<UserInfo> userlist;
     MeetingRoom room;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +40,13 @@ public class R_TimeActivity extends AppCompatActivity {
         //从intent获取到房间信息
         room = (MeetingRoom)getIntent().getSerializableExtra("room");
         initTimeView();
-        initMemberView();
     }
 
     public void initTimeView() {
         ImageView b_add = findViewById(R.id.b_add);
         ImageView b_sub = findViewById(R.id.b_sub);
+        b_date = findViewById(R.id.b_date);
+        final EditText edit_theme = findViewById(R.id.edit_theme);
         final TextView time = findViewById(R.id.time);
         b_selectDate = findViewById(R.id.selectDate);
         b_selectDate.setOnClickListener(new View.OnClickListener() {
@@ -85,27 +77,11 @@ public class R_TimeActivity extends AppCompatActivity {
                     time.setText(String.valueOf(Integer.parseInt(time.getText().toString())-15));
             }
         });
-        final EditText edit_theme = findViewById(R.id.edit_theme);
-        Button b_date = findViewById(R.id.b_date);
+
         b_date.setOnClickListener(new View.OnClickListener() {
-            //预约按钮的响应函数
+            //持续时间+15min
             @Override
             public void onClick(View view) {
-                userlist = new ArrayList<>();
-                userlist.clear();
-                //从获取到被选中的CheckBox的list上的用户，添加到userlist上
-                for(CheckBox checkBox:list)
-                {
-                    if(checkBox.isChecked())
-                    {
-                        userlist.add(Server.getUserInfobyRealName(checkBox.getText().toString(),Client.getOrgId()));
-                    }
-                }
-                //新建一个会议对象，填写主题、开始时间、持续时间、创建人、会议室和成员
-                final ArrayList<Participant> participants = new ArrayList<>();
-                for(UserInfo userInfo:userlist){
-                    participants.add(new Participant(userInfo.getId()));
-                }
                 Date enddate = calendar.getTime();
                 Calendar calendar_1 = Calendar.getInstance();
                 calendar_1.setTime(enddate);
@@ -114,20 +90,17 @@ public class R_TimeActivity extends AppCompatActivity {
                         Server.getCnt_reserverinfos(),//会议ID
                         Client.getUserInfoId(),//创建人ID
                         edit_theme.getText().toString(),//会议主题
-                        participants,//参会人员，由之前的intent获得
+                        null,//参会人员，由之前的intent获得
                         0,//初始状态为0
                         new Date(),//当前系统时间
                         calendar.getTime(),//开始时间
                         calendar_1.getTime(),//结束时间
                         room.getTrans_id()//会议室ID
                 );
-
-                //由于会议信息已经全部填写完毕用MyDialogFragment显示出来进行确认
-                MyDialogFragment myDialogFragment = new MyDialogFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("meeting", meeting);
-                myDialogFragment.setArguments(bundle);
-                myDialogFragment.show(getFragmentManager(), "Dialog");
+                Intent intent = new Intent(getApplicationContext(),MemberActivity.class);
+                intent.putExtra("meeting",meeting);
+                startActivity(intent);
+                overridePendingTransition(0,0);
             }
         });
         //初始化ui上信息为当前系统时间
@@ -184,26 +157,5 @@ public class R_TimeActivity extends AppCompatActivity {
      */
     public static String datechange(Date date, String pattern) {
         return new SimpleDateFormat(pattern, Locale.CHINA).format(date);
-    }
-
-    /**
-     * 初始化成员列表
-     */
-    public void initMemberView() {
-        AutoLinefeedLayout memberView = findViewById(R.id.memberView);
-        //AutoLinefeedLayout自定义控件组详见layout.AutoLineFeedLayout.java，主要功能为到填充到段尾时自动切下一行
-        int i = 0;
-        list = new ArrayList<>();
-        for(UserInfo userinfo:Server.getUserInfosByOrgId(Client.getOrgId()))//从服务器获取用户列表
-        {
-            if(userinfo.getId().equals(Client.getUserInfoId()))
-                continue;//过滤掉当前客户端用户（自己）
-            LayoutInflater inflater = LayoutInflater.from(this);
-            inflater.inflate(R.layout.my_checkbox, memberView);//为控件组添加自定义的CheckBox组件
-            FrameLayout frameLayout = (FrameLayout)memberView.getChildAt(i++);
-            CheckBox checkBox = (CheckBox)frameLayout.getChildAt(0);
-            list.add(checkBox);//将CheckBox存入list，方便之后操作
-            checkBox.setText(userinfo.getName());//设置CheckBox为用户真名
-        }
     }
 }

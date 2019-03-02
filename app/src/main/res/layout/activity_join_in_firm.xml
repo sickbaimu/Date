@@ -5,19 +5,25 @@
     android:id="@+id/activity_join_in_firm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@color/White">
     <android.support.percent.PercentFrameLayout
+        android:background="@color/Blue"
+        android:padding="5dp"
         app:layout_widthPercent="100%"
         app:layout_heightPercent="10%">
         <EditText
+            android:inputType="number"
             android:layout_gravity="start"
             android:id="@+id/input"
-            android:background="@color/Transparent"
+            android:background="@color/White"
             app:layout_widthPercent="80%"
             app:layout_heightPercent="100%"
-            android:hint="@string/hint_search_label"
+            android:hint="请输入您要加入的组织id"
             android:textColorHint="#777777" />
         <Button
+            android:id="@+id/b_search"
+            android:background="@color/Blue"
+            android:textColor="@color/White"
             android:layout_gravity="end"
             android:text="@string/search_label"
             app:layout_widthPercent="20%"
@@ -28,14 +34,111 @@
         app:layout_widthPercent="100%"
         app:layout_heightPercent="90%">
         <LinearLayout
+            android:id="@+id/content"
+            android:visibility="visible"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <include layout="@layout/block_search_result" />
-            <include layout="@layout/block_search_result" />
-            <include layout="@layout/block_search_result" />
-            <include layout="@layout/block_search_result" />
-            <include layout="@layout/block_search_result" />
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/my_null"
+                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/firm_log">
+            </ImageView>
+            <TextView
+                android:id="@+id/t_firmname"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="t_firmname"/>
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:background="@color/Transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp">
+                    <TextView
+                        android:textSize="22sp"
+                        android:layout_gravity="start"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/Blue"
+                        android:text="@string/basic_info_label"/>
+                    <View
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/White"/>
+                    <TextView
+                        android:id="@+id/t_basci_info"
+                        android:textSize="18sp"
+                        android:layout_gravity="start"
+                        android:gravity="start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="basic_info"/>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:background="@color/Transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp">
+                    <TextView
+                        android:textSize="22sp"
+                        android:layout_gravity="start"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/Blue"
+                        android:text="@string/brief_introduction_label"/>
+                    <View
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/White"/>
+                    <TextView
+                        android:id="@+id/t_brief"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="t_brief"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <Button
+                android:id="@+id/b_sure"
+                style="@style/MyButton"
+                android:text="加入"/>
         </LinearLayout>
     </ScrollView>
 </android.support.percent.PercentFrameLayout>

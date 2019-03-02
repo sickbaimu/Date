@@ -3,10 +3,12 @@ package com.lele.date.faker;
 import android.util.Log;
 
 import com.lele.date.entity.DepartmentInfo;
+import com.lele.date.entity.User;
 import com.lele.date.entity.UserInfo;
 
 public class Client {
     private static UserInfo userInfo;
+    private static User user;
 
     public static UserInfo getUserInfo() {
         return userInfo;
@@ -24,5 +26,13 @@ public class Client {
     }
     public static int getUserInfoId(){
         return userInfo.getId();
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        Client.user = user;
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/White"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        style="@style/MyTextView"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%"
+        android:text="选择参与者"
+        />
+    <ScrollView
+        app:layout_heightPercent="90%"
+        app:layout_widthPercent="100%"
+        android:layout_gravity="bottom">
+        <LinearLayout
+            android:padding="10dp"
+            android:id="@+id/timeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.lele.date.layout.AutoLinefeedLayout
+                android:orientation="horizontal"
+                android:id="@+id/memberView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+            <Button
+                android:id="@+id/b_date"
+                android:text="预约"
+                style="@style/MyButton" />
+        </LinearLayout>
+    </ScrollView>
+</android.support.percent.PercentFrameLayout >

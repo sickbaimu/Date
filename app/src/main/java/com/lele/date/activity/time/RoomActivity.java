@@ -1,8 +1,7 @@
-package com.lele.date.activity;
+package com.lele.date.activity.time;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,31 +16,28 @@ import com.lele.date.entity.MeetingRoom;
 import com.lele.date.entity.ReserverInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
-import com.lele.date.fragment.MyDialogFragment;
+import com.lele.date.fragment.FinalConfirmMeetingFragment;
 
 import java.util.List;
 
-public class M_RoomListActivity extends AppCompatActivity {
+public class RoomActivity extends AppCompatActivity {
     /**
-     * 按成员预约模式下的房间列表页面
+     * 按时间选择预约模式下的会议室选择页面
      */
     static ReserverInfo meeting;
-
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
-        //从intent中获取尚未完善的Meeting对象
+        //从intent获取meeting对象
         meeting = (ReserverInfo)getIntent().getSerializableExtra("meeting");
-        //设置页面recylerView适配房间对象
+        //设置适会议室配器
         RecyclerView recyclerView =  findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         RoomAdapter roomAdapter = new RoomAdapter(Server.getMeetingRoomsByOrgId(Client.getOrgId()));
         recyclerView.setAdapter(roomAdapter);
     }
-
     class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         private List<MeetingRoom> roomList;
         class ViewHolder extends RecyclerView.ViewHolder{
@@ -67,10 +63,9 @@ public class M_RoomListActivity extends AppCompatActivity {
         }
 
         @Override
-        @NonNull
-        public RoomAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_room,parent,false);
-            RoomAdapter.ViewHolder holder = new RoomAdapter.ViewHolder(view);
+            ViewHolder holder = new ViewHolder(view);
             holder.view.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -78,20 +73,21 @@ public class M_RoomListActivity extends AppCompatActivity {
                     CardView cardView =(CardView)view;
                     TextView textView = cardView.findViewById(R.id.room_id);
                     String roomid = textView.getText().toString();
-                    meeting.setRoomId(Integer.valueOf(roomid));//为会议设置会议室
-                    MyDialogFragment myDialogFragment = new MyDialogFragment();
+                    MeetingRoom room = Server.getMeetingRoomByIdAndOrgId(Integer.valueOf(roomid), Client.getOrgId());
+                    meeting.setRoomId(room.getTrans_id());//为会议设置会议室
+                    //由于会议信息都已经填写完毕，调用MyDialogFragment进行显示并最后确认预约
+                    FinalConfirmMeetingFragment myDialogFragment = new FinalConfirmMeetingFragment();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("meeting", meeting);
                     myDialogFragment.setArguments(bundle);
                     myDialogFragment.show(getFragmentManager(), "Dialog");
-
                 }
             });
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position){
+        public void onBindViewHolder(ViewHolder holder, int position){
             MeetingRoom room = roomList.get(position);
             holder.imageView.setImageResource(R.drawable.img_room_free);
             holder.textView.setText(room.getRoomName());

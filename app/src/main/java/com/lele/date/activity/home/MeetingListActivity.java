@@ -1,4 +1,4 @@
-package com.lele.date.activity;
+package com.lele.date.activity.home;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class O_MeetingListActivity extends AppCompatActivity {
+public class MeetingListActivity extends AppCompatActivity {
 
     /**
      * 会议列表界面，显示各种类型下的会议列表
@@ -134,7 +134,7 @@ public class O_MeetingListActivity extends AppCompatActivity {
                     TextView textView = cardView.findViewById(R.id.meeting_id);
                     String meetingid = textView.getText().toString();
                     ReserverInfo meeting = Server.getReserverById(Integer.valueOf(meetingid));
-                    Intent intent = new Intent(view.getContext(), O_MeetingInfoActivity.class);
+                    Intent intent = new Intent(view.getContext(), MeetingInfoActivity.class);
                     intent.putExtra("meeting",meeting);
                     view.getContext().startActivity(intent);
                 }

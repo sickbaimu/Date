@@ -1,4 +1,4 @@
-package com.lele.date.activity;
+package com.lele.date.activity.room;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import com.lele.date.entity.MeetingRoom;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
 
-public class R_RoomInfoActivity extends AppCompatActivity {
+public class RoomInfoActivity extends AppCompatActivity {
 
     /**
      * 按会议室预约模式下的房间信息
@@ -48,7 +48,7 @@ public class R_RoomInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //将该会议室信息传入intent并启动活动进行时间等其他信息填充
-                Intent intent = new Intent(getApplicationContext(), R_TimeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), TimeActivity.class);
                 intent.putExtra("room",room);
                 startActivity(intent);
                 overridePendingTransition(0, 0);

@@ -1,4 +1,4 @@
-package com.lele.date.activity;
+package com.lele.date.activity.home;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -23,6 +23,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.lele.date.R;
+import com.lele.date.activity.before.LoginActivity;
+import com.lele.date.activity.member.TimeActivity;
+import com.lele.date.activity.personal.MyFirmActivity;
+import com.lele.date.activity.personal.PersonalSettingActivity;
+import com.lele.date.activity.personal.SystemSettingActivity;
+import com.lele.date.activity.personal.VersionActivity;
+import com.lele.date.activity.room.RoomInfoActivity;
+import com.lele.date.activity.time.MemberActivity;
 import com.lele.date.entity.ReserverInfo;
 import com.lele.date.entity.MeetingRoom;
 import com.lele.date.entity.UserInfo;
@@ -52,6 +60,7 @@ public class HomeActivity extends AppCompatActivity {
     Button b_type_room,b_type_time,b_type_member;
     Button b_selectDate,b_selectTimeBegin;
     Calendar calendar = Calendar.getInstance();
+    TextView firm_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }
                 //启动活动到时间等其他信息填写，传递userlist
-                Intent intent = new Intent(getApplicationContext(),M_TimeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), TimeActivity.class);
                 intent.putExtra("userlist",userlist);
                 startActivity(intent);
                 overridePendingTransition(0,0);
@@ -155,7 +164,7 @@ public class HomeActivity extends AppCompatActivity {
             //获取空闲房间的响应函数
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), T_RoomListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MemberActivity.class);
                 Date enddate = calendar.getTime();
                 Calendar calendar_1 = Calendar.getInstance();
                 calendar_1.setTime(enddate);
@@ -260,7 +269,7 @@ public class HomeActivity extends AppCompatActivity {
                 LinearLayout linearLayout = (LinearLayout)gridView.getAdapter().getView(arg2,arg1,null);
                 TextView textView = linearLayout.findViewById(R.id.room_id);
                 String roomid = textView.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), R_RoomInfoActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RoomInfoActivity.class);
                 intent.putExtra("roomid",roomid);
                 startActivity(intent);overridePendingTransition(0,0);
             }
@@ -303,7 +312,7 @@ public class HomeActivity extends AppCompatActivity {
         b_system_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), P_SystemSettingActivity.class));
+                startActivity(new Intent(getApplicationContext(), SystemSettingActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -312,7 +321,7 @@ public class HomeActivity extends AppCompatActivity {
         b_personal_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), P_PersonalSettingActivity.class));
+                startActivity(new Intent(getApplicationContext(), PersonalSettingActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -321,7 +330,7 @@ public class HomeActivity extends AppCompatActivity {
         b_my_firm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), P_MyFirmActivity.class));
+                startActivity(new Intent(getApplicationContext(), MyFirmActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -330,7 +339,7 @@ public class HomeActivity extends AppCompatActivity {
         b_version.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), P_VersionActivity.class));
+                startActivity(new Intent(getApplicationContext(), VersionActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -340,7 +349,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new Client();
-                startActivity(new Intent(getApplicationContext(), B_LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -363,7 +372,7 @@ public class HomeActivity extends AppCompatActivity {
         b_my_sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), O_MeetingListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MeetingListActivity.class);
                 intent.putExtra("filter","gone");
                 startActivity(intent);overridePendingTransition(0, 0);
             }
@@ -372,7 +381,7 @@ public class HomeActivity extends AppCompatActivity {
         b_my_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), O_MeetingListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MeetingListActivity.class);
                 intent.putExtra("filter","new");
                 startActivity(intent);overridePendingTransition(0, 0);
             }
@@ -381,7 +390,7 @@ public class HomeActivity extends AppCompatActivity {
         b_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), O_MeetingListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MeetingListActivity.class);
                 intent.putExtra("filter","all");
                 startActivity(intent);overridePendingTransition(0, 0);
             }
@@ -392,6 +401,8 @@ public class HomeActivity extends AppCompatActivity {
      * 初始化顶部按钮，来选择预约方式
      */
     public void initTopButton(){
+        firm_name = findViewById(R.id.firm_name);
+        firm_name.setText(Server.getOrganizationInfoById(Client.getOrgId()).getOrgName());
         b_type_room = findViewById(R.id.b_type_room);
         b_type_time = findViewById(R.id.b_type_time);
         b_type_member = findViewById(R.id.b_type_member);

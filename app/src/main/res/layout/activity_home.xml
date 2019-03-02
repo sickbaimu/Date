@@ -25,6 +25,7 @@
                 android:src="@drawable/menu"
                 />
             <TextView
+                android:id="@+id/firm_name"
                 style="@style/MyTextView"
                 android:background="@color/Transparent"
                 android:text="西南交通大学会议室"
@@ -153,6 +154,7 @@
                     android:layout_height="match_parent"
                     android:text="60"/>
                 <ImageView
+                    android:contentDescription="@string/my_null"
                     android:id="@+id/b_add"
                     android:scaleType="centerCrop"
                     android:adjustViewBounds="true"
@@ -164,7 +166,7 @@
             <Button
                 android:id="@+id/b_time_next"
                 style="@style/MyButton"
-                android:text="获取空闲房间" />
+                android:text="获取人员" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/memberView"

@@ -1,18 +1,18 @@
-package com.lele.date.activity;
+package com.lele.date.activity.personal;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.lele.date.R;
 
-public class P_VersionActivity extends AppCompatActivity {
+public class PersonalSettingActivity extends AppCompatActivity {
 
     /**
-     * 版本信息，待完善
+     * 个人设置，待完善
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_version);
+        setContentView(R.layout.activity_personal_setting);
     }
 }

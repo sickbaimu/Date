@@ -1,4 +1,4 @@
-package com.lele.date.activity;
+package com.lele.date.activity.before;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.lele.date.R;
 
-public class B_HomeDefaultActivity extends AppCompatActivity {
+public class HomeDefaultActivity extends AppCompatActivity {
 
     Button b_registerfirm,b_joininfirm;
     @Override
@@ -27,18 +27,16 @@ public class B_HomeDefaultActivity extends AppCompatActivity {
         b_registerfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(B_HomeDefaultActivity.this, B_AddFirmActivity.class));
+                startActivity(new Intent(HomeDefaultActivity.this, AddFirmActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
-
         b_joininfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(B_HomeDefaultActivity.this, B_BindFirmActivity.class));
+                startActivity(new Intent(HomeDefaultActivity.this, BindFirmActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
-
     }
 }

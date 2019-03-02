@@ -1,80 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.percent.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_home"
-    android:background="@drawable/background"
+    android:background="@color/White"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <View
-        android:layout_gravity="top"
+    <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="10%" />
+        app:layout_heightPercent="15%"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="top"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:text="欢迎新用户!" />
+        <View
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="-1dp"
+            android:background="@color/Blue"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="top"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="请用合适的方式选择属于你的组织" />
+    </LinearLayout>
+
     <android.support.percent.PercentFrameLayout
         app:layout_widthPercent="100%"
         app:layout_heightPercent="80%"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="30dp"
         >
-        <View
-            android:id="@+id/view1"
+        <android.support.v7.widget.CardView
             android:layout_gravity="top|center_horizontal"
-            app:layout_widthPercent="90%"
-            app:layout_heightPercent="10%"
-            />
-        <android.support.percent.PercentFrameLayout
-            android:layout_gravity="top|center_horizontal"
-            android:background="@color/Transparent"
+            android:layout_margin="16dp"
             app:layout_widthPercent="90%"
             app:layout_heightPercent="45%"
             >
-            <ImageView
-                android:contentDescription="@string/register_organization_label"
-                app:layout_widthPercent="50%"
-                app:layout_heightPercent="100%"
-                android:layout_gravity="start"
-                android:src="@drawable/leader"
-                />
-            <Button
-                android:id="@+id/register_firm"
-                app:layout_widthPercent="50%"
-                app:layout_heightPercent="100%"
-                android:layout_gravity="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:textSize="30sp"
-                android:textColor="@color/White"
-                android:text="@string/register_organization_label"
-                />
-        </android.support.percent.PercentFrameLayout>
+            <android.support.percent.PercentFrameLayout
+                android:padding="16dp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                >
+                <ImageView
+                    android:contentDescription="@string/register_organization_label"
+                    app:layout_widthPercent="50%"
+                    app:layout_heightPercent="100%"
+                    android:layout_gravity="start"
+                    android:src="@drawable/leader"
+                    />
+                <Button
+                    android:id="@+id/register_firm"
+                    app:layout_widthPercent="50%"
+                    app:layout_heightPercent="100%"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:textSize="25sp"
+                    android:text="@string/register_organization_label"
+                    />
+            </android.support.percent.PercentFrameLayout>
 
-        <android.support.percent.PercentFrameLayout
-            android:background="@color/Transparent"
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="16dp"
             app:layout_widthPercent="90%"
-            app:layout_heightPercent="45%"
-            >
-            <ImageView
-                android:contentDescription="@string/join_organization"
-                app:layout_widthPercent="50%"
-                app:layout_heightPercent="100%"
-                android:layout_gravity="start"
-                android:src="@drawable/follower"
-                />
-            <Button
-                android:id="@+id/joinin_firm"
-                app:layout_widthPercent="50%"
-                app:layout_heightPercent="100%"
-                android:layout_gravity="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:textSize="30sp"
-                android:textColor="@color/White"
-                android:text="@string/join_organization"
-                />
-        </android.support.percent.PercentFrameLayout>
-
+            app:layout_heightPercent="45%">
+            <android.support.percent.PercentFrameLayout
+                android:background="@color/Transparent"
+                android:padding="16dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                >
+                <ImageView
+                    android:contentDescription="@string/join_organization"
+                    app:layout_widthPercent="50%"
+                    app:layout_heightPercent="100%"
+                    android:layout_gravity="start"
+                    android:src="@drawable/follower"
+                    />
+                <Button
+                    android:id="@+id/joinin_firm"
+                    app:layout_widthPercent="50%"
+                    app:layout_heightPercent="100%"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:textSize="25sp"
+                    android:text="@string/join_organization"
+                    />
+            </android.support.percent.PercentFrameLayout>
+        </android.support.v7.widget.CardView>
     </android.support.percent.PercentFrameLayout>
     <View
         android:layout_gravity="bottom"

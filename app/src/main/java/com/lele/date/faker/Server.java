@@ -1,7 +1,5 @@
 package com.lele.date.faker;
 
-import android.util.Log;
-
 import com.lele.date.entity.DepartmentInfo;
 import com.lele.date.entity.OrganizationInfo;
 import com.lele.date.entity.Participant;
@@ -20,7 +18,7 @@ import java.util.TimeZone;
 
 public class Server{
     private String url = "http://192.168.199.227:8080/";
-    int version = 1;
+    int version = 2;
     private String usersname[]={"董金华","陈超凡","蒋清","周和夏","虞若何","秦安民","梅古达","马修","福山浩"};
     private String roomsname[] = {"X1001","X1002","X1003","X2001","X2002","X2003","X3001","X3002","X3003","X4001","X4002","X4004","X4004"};
     private String departmentname[]={"技术部","财务部"};
@@ -120,57 +118,39 @@ public class Server{
         reserveInfos.add(new ReserverInfo(cnt_reserverinfos++,1, meetingname[2], participants,0,calendar_3.getTime(), calendar_3.getTime(), calendar_3.getTime(), 1));
         reserveInfos.add(new ReserverInfo(cnt_reserverinfos++,1, meetingname[3], participants,0,calendar_4.getTime(), calendar_4.getTime(), calendar_4.getTime(), 2));
         reserveInfos.add(new ReserverInfo(cnt_reserverinfos++,1, meetingname[4], participants,0,calendar_5.getTime(), calendar_5.getTime(), calendar_5.getTime(), 4));
+
+        users.add(new User(cnt_users++,"hello","hello", 0));
     }
 
     public String getUrl() {
         return url;
     }
 
-    public static ArrayList<OrganizationInfo> getOrganizationInfos() {
+    private static ArrayList<OrganizationInfo> getOrganizationInfos() {
         return organizationInfos;
     }
 
-    public static ArrayList<ReserverInfo> getReserveInfos() {
+    private static ArrayList<ReserverInfo> getReserveInfos() {
         return reserveInfos;
-    }
-
-    public static int getCnt_organzations() {
-        return cnt_organzations;
-    }
-
-    public static int getCnt_departments() {
-        return cnt_departments;
-    }
-
-    public static int getCnt_users() {
-        return cnt_users;
-    }
-
-    public static int getCnt_userinfos() {
-        return cnt_userinfos;
-    }
-
-    public static int getCnt_meetingrooms() {
-        return cnt_meetingrooms;
     }
 
     public static int getCnt_reserverinfos() {
         return cnt_reserverinfos;
     }
 
-    public static ArrayList<User> getUsers() {
+    private static ArrayList<User> getUsers() {
         return users;
     }
 
-    public static ArrayList<UserInfo> getUserInfos() {
+    private static ArrayList<UserInfo> getUserInfos() {
         return userInfos;
     }
 
-    public static ArrayList<DepartmentInfo> getDepartmentInfos() {
+    private static ArrayList<DepartmentInfo> getDepartmentInfos() {
         return departmentInfos;
     }
 
-    public static ArrayList<MeetingRoom> getMeetingRooms() {
+    private static ArrayList<MeetingRoom> getMeetingRooms() {
         return meetingRooms;
     }
 
@@ -240,7 +220,6 @@ public class Server{
 
     public static String getUserInfoNameById(int user_id){
         for (UserInfo userinfo:getUserInfos()){
-            Log.d("checkid",String.valueOf(userinfo.getId()));
             if(userinfo.getId() == user_id)
                 return userinfo.getName();
         }
@@ -316,5 +295,23 @@ public class Server{
     public static void AddReserverInfo(ReserverInfo reserverInfo){
         cnt_reserverinfos++;
         reserveInfos.add(reserverInfo);
+    }
+
+    public static void AddUser(String username,String pwd){
+        users.add(new User(cnt_users++,username,pwd,1));
+    }
+
+    public static void AddUserInfo(int userid,String userinfoname,int depart_id){
+        userInfos.add(new UserInfo(userid,userinfoname,String.valueOf(depart_id),1));
+        cnt_userinfos++;
+    }
+
+    public static ArrayList<DepartmentInfo> getDepartmentsByOrgId(int org_id){
+        ArrayList<DepartmentInfo> arrayList = new ArrayList<>();
+        for(DepartmentInfo departmentInfo:getDepartmentInfos())
+            if(departmentInfo.getOrgId()==org_id)
+                arrayList.add(departmentInfo);
+            return arrayList;
+
     }
 }

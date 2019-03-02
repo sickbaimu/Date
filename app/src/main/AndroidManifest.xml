@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lele.date">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,49 +12,52 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.M_RoomListActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activity.M_TimeActivity"
-            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.room.MemberActivity"></activity>
         <activity
-            android:name=".activity.R_TimeActivity"
+            android:name=".activity.member.RoomActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.T_MemberListActivity"
+            android:name=".activity.member.TimeActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.T_RoomListActivity"
+            android:name=".activity.room.TimeActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.R_RoomInfoActivity"
+            android:name=".activity.time.MemberActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.O_MeetingInfoActivity"
+            android:name=".activity.time.RoomActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.O_MeetingListActivity"
+            android:name=".activity.room.RoomInfoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.P_VersionActivity"
+            android:name=".activity.home.MeetingInfoActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.P_SystemSettingActivity"
+            android:name=".activity.home.MeetingListActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.B_AddUserActivity"
+            android:name=".activity.personal.VersionActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.B_AddFirmActivity"
+            android:name=".activity.personal.SystemSettingActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.P_PersonalSettingActivity"
+            android:name=".activity.before.AddUserActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.P_MyFirmActivity"
+            android:name=".activity.before.AddFirmActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.B_LoginActivity"
-            android:windowSoftInputMode="stateHidden" >
+            android:name=".activity.personal.PersonalSettingActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.personal.MyFirmActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.before.LoginActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,21 +65,27 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="www.example.com"
                     android:pathPrefix="/gizmos"
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.B_BindFirmActivity"
+        <activity
+            android:name=".activity.before.BindFirmActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.B_HomeDefaultActivity"
+        <activity
+            android:name=".activity.before.HomeDefaultActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.HomeActivity"
+        <activity
+            android:name=".activity.home.HomeActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.B_GetBackPwdActivity"
+        <activity
+            android:name=".activity.before.GetBackPwdActivity"
             android:windowSoftInputMode="stateHidden" />
     </application>
 

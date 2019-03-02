@@ -22,4 +22,8 @@ public class DepartmentInfo implements Serializable {
     public Integer getOrgId() {
         return orgId;
     }
+
+    public String getDepartName() {
+        return departName;
+    }
 }

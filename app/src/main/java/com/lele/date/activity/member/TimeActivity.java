@@ -1,4 +1,4 @@
-package com.lele.date.activity;
+package com.lele.date.activity.member;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class M_TimeActivity extends AppCompatActivity {
+public class TimeActivity extends AppCompatActivity {
 
     /**
      * 按成员预约模式下的时间信息填入页面，同时也填入会议主题、与会人等其他信息
@@ -102,7 +102,7 @@ public class M_TimeActivity extends AppCompatActivity {
                         calendar_1.getTime(),//结束时间
                         -1//会议室ID未填写
                         );
-                Intent intent = new Intent(getApplicationContext(),M_RoomListActivity.class);//下一步走向选择会议室
+                Intent intent = new Intent(getApplicationContext(), RoomActivity.class);//下一步走向选择会议室
                 intent.putExtra("meeting",meeting);
                 startActivity(intent);
                 overridePendingTransition(0,0);

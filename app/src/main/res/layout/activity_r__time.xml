@@ -151,23 +151,9 @@
                         />
                 </LinearLayout>
             </android.support.percent.PercentFrameLayout>
-            <TextView
-                android:layout_marginStart="20dp"
-                android:text="选择成员："
-                android:textSize="20sp"
-                android:layout_gravity="start|center_vertical"
-                android:gravity="start|center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp" />
-            <com.lele.date.layout.AutoLinefeedLayout
-                android:orientation="horizontal"
-                android:id="@+id/memberView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"/>
             <Button
                 android:id="@+id/b_date"
-                android:text="预约"
+                android:text="选择成员"
                 style="@style/MyButton" />
         </LinearLayout>
     </ScrollView>

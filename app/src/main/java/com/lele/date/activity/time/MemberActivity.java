@@ -1,5 +1,6 @@
-package com.lele.date.activity;
+package com.lele.date.activity.time;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,16 +15,14 @@ import android.widget.FrameLayout;
 import com.lele.date.R;
 import com.lele.date.entity.Participant;
 import com.lele.date.entity.ReserverInfo;
-import com.lele.date.entity.User;
 import com.lele.date.entity.UserInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
-import com.lele.date.fragment.MyDialogFragment;
 import com.lele.date.layout.AutoLinefeedLayout;
 
 import java.util.ArrayList;
 
-public class T_MemberListActivity extends AppCompatActivity {
+public class MemberActivity extends AppCompatActivity {
 
     /**
      * 按时间选择预约模式下的成员选择页面
@@ -73,12 +72,9 @@ public class T_MemberListActivity extends AppCompatActivity {
                 //为会议设置会议主题
                 EditText editText = findViewById(R.id.edit_theme);
                 meeting.setMeetingTopic(editText.getText().toString());
-                //由于会议信息都已经填写完毕，调用MyDialogFragment进行显示并最后确认预约
-                MyDialogFragment myDialogFragment = new MyDialogFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("meeting", meeting);
-                myDialogFragment.setArguments(bundle);
-                myDialogFragment.show(getFragmentManager(), "Dialog");
+                Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
+                intent.putExtra("meeting",meeting);
+                startActivity(intent);
             }
         });
 

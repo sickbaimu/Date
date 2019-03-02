@@ -1,15 +1,16 @@
-package com.lele.date.activity;
+package com.lele.date.activity.before;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lele.date.R;
+import com.lele.date.activity.home.HomeActivity;
+import com.lele.date.entity.UserInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
 import com.lele.date.entity.User;
@@ -21,7 +22,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class B_LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button b_register,b_get_back_pwd,b_login;
     EditText edit_user,edit_pwd;
@@ -45,7 +46,7 @@ public class B_LoginActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(B_LoginActivity.this, B_AddUserActivity.class));
+                startActivity(new Intent(LoginActivity.this, AddUserActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -56,7 +57,7 @@ public class B_LoginActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(B_LoginActivity.this, B_GetBackPwdActivity.class));
+                startActivity(new Intent(LoginActivity.this, GetBackPwdActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -70,7 +71,8 @@ public class B_LoginActivity extends AppCompatActivity {
                 switch (Check(edit_user.getText().toString(),edit_pwd.getText().toString()))
                 {
                     case 0:break;
-                    case 1:startActivity(new Intent(getApplicationContext(),HomeActivity.class));overridePendingTransition(0, 0);break;
+                    case 1:startActivity(new Intent(getApplicationContext(), HomeActivity.class));overridePendingTransition(0, 0);break;
+                    case 2:startActivity(new Intent(getApplicationContext(), HomeDefaultActivity.class));overridePendingTransition(0, 0);break;
                     case -1:break;
                     default:break;
                 }
@@ -81,16 +83,23 @@ public class B_LoginActivity extends AppCompatActivity {
      * 核对用户名和密码
      * @param username 用户名
      * @param pwd 密码
-     * @return 1表示存在，-1表示不存在
+     * @return 1表示存在User和Userinfo，2表示仅存在User，-1表示不存在
      */
     public int Check(String username,String pwd)
     {
         User user = Server.LoginCheck(username,pwd);
         if(user!=null)
         {
-            Client.setUserInfo(Server.getUserInfoByUserId(user.getId()));
             Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_SHORT).show();
-            return 1;
+            UserInfo userInfo = Server.getUserInfoByUserId(user.getId());
+            if(userInfo!=null) {
+                Client.setUserInfo(userInfo);
+                Client.setUser(user);
+                return 1;
+            }else{
+                Client.setUser(user);
+                return 2;
+            }
         }
         else
         {

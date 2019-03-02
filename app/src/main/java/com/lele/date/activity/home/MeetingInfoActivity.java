@@ -1,10 +1,8 @@
-package com.lele.date.activity;
+package com.lele.date.activity.home;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lele.date.R;
 import com.lele.date.entity.ReserverInfo;
@@ -14,7 +12,7 @@ import com.lele.date.faker.Server;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class O_MeetingInfoActivity extends AppCompatActivity {
+public class MeetingInfoActivity extends AppCompatActivity {
 
     /**
      * 会议信息页面，显示从intent获得的会议的所有信息

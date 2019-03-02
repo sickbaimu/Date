@@ -1,8 +1,8 @@
-package com.lele.date.activity;
+package com.lele.date.activity.member;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,28 +17,31 @@ import com.lele.date.entity.MeetingRoom;
 import com.lele.date.entity.ReserverInfo;
 import com.lele.date.faker.Client;
 import com.lele.date.faker.Server;
-import com.lele.date.fragment.MyDialogFragment;
+import com.lele.date.fragment.FinalConfirmMeetingFragment;
 
 import java.util.List;
 
-public class T_RoomListActivity extends AppCompatActivity {
+public class RoomActivity extends AppCompatActivity {
     /**
-     * 按时间选择预约模式下的会议室选择页面
+     * 按成员预约模式下的房间列表页面
      */
     static ReserverInfo meeting;
+
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
-        //从intent获取meeting对象
+        //从intent中获取尚未完善的Meeting对象
         meeting = (ReserverInfo)getIntent().getSerializableExtra("meeting");
-        //设置适会议室配器
+        //设置页面recylerView适配房间对象
         RecyclerView recyclerView =  findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         RoomAdapter roomAdapter = new RoomAdapter(Server.getMeetingRoomsByOrgId(Client.getOrgId()));
         recyclerView.setAdapter(roomAdapter);
     }
+
     class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         private List<MeetingRoom> roomList;
         class ViewHolder extends RecyclerView.ViewHolder{
@@ -64,9 +67,10 @@ public class T_RoomListActivity extends AppCompatActivity {
         }
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        @NonNull
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_room,parent,false);
-            ViewHolder holder = new ViewHolder(view);
+            RoomAdapter.ViewHolder holder = new RoomAdapter.ViewHolder(view);
             holder.view.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -74,18 +78,20 @@ public class T_RoomListActivity extends AppCompatActivity {
                     CardView cardView =(CardView)view;
                     TextView textView = cardView.findViewById(R.id.room_id);
                     String roomid = textView.getText().toString();
-                    MeetingRoom room = Server.getMeetingRoomByIdAndOrgId(Integer.valueOf(roomid), Client.getOrgId());
-                    meeting.setRoomId(room.getTrans_id());//为会议设置会议室
-                    Intent intent = new Intent(getApplicationContext(),T_MemberListActivity.class);
-                    intent.putExtra("meeting",meeting);
-                    startActivity(intent);
+                    meeting.setRoomId(Integer.valueOf(roomid));//为会议设置会议室
+                    FinalConfirmMeetingFragment myDialogFragment = new FinalConfirmMeetingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("meeting", meeting);
+                    myDialogFragment.setArguments(bundle);
+                    myDialogFragment.show(getFragmentManager(), "Dialog");
+
                 }
             });
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position){
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position){
             MeetingRoom room = roomList.get(position);
             holder.imageView.setImageResource(R.drawable.img_room_free);
             holder.textView.setText(room.getRoomName());
